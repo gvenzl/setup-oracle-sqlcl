@@ -1,0 +1,59 @@
+= Setup Oracle SQLcl Action
+:linkattrs:
+:project-owner: aalmiray
+:project-name:  setup-oracle-sqlcl
+:project-tag:   v1
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+image:https://img.shields.io/github/v/release/{project-owner}/{project-name}["GitHub release", link="https://github.com/{project-owner}/{project-name}/releases"]
+
+Sets up link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/[Oracle SQLcl] as a tool. This action locates
+a given version of Oracle SQLcl, downloads it, and configures the `PATH` environment.
+
+Supported platforms:
+
+ - Linux
+ - MacOs
+ - Windows
+
+== Inputs
+
+Following inputs may be used as `step.with` keys:
+
+[%header,cols="<2,<,<,<3",width="100%"]
+|===
+| Name               | Required | Default  | Description
+| version            |          | latest   | Valid version from link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/[download] site.
+| setup-java-version |          | 17       | Automatically setup Oracle JDK with the chosen version. Set to `false` to skip it.
+|===
+
+NOTE: If you decide to skip automatic Java setup then you'll be responsible for configuring Java with version `11` as a minimum.
+We recommend using link:https://github.com/actions/setup-java[actions/setup-java].
+
+== Usage
+
+[source,yaml]
+[subs="attributes"]
+----
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: {project-owner}/{project-name}@{project-tag}
+      - name: Run SQLcl
+        run: |
+          sql &lt;arguments&gt;
+----
+
+== Versions
+
+Full list of supported versions can be found link:https://github.com/aalmiray/setup-oracle-sqlcl/blob/main/versions.txt[here].
+Use `latest` (default) to always pull the latest release. Use an explicit version to pin it for reproducible builds.

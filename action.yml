@@ -1,0 +1,38 @@
+name: Setup-Oracle-SQLcl
+
+description: 'Setup Oracle SQLcl'
+
+branding:
+  icon: 'database'
+  color: 'red'
+
+inputs:
+  version:
+    description: 'The SQLCl version to download.'
+    default: 'latest'
+    required: true
+
+  setup-java-version:
+    default: '17'
+    description: 'Setup internal Java runtime.'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Setup Java'
+      uses: actions/setup-java@v3
+      if: ${{ inputs.setup-java-version != 'false' }}
+      with:
+        java-version: ${{ inputs.setup-java-version }}
+        distribution: oracle
+
+    - name: 'Verify Java Version'
+      shell: bash
+      run: "${GITHUB_ACTION_PATH}/verify_java.sh"
+
+    - name: 'Download SQLcl'
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+      run: "${GITHUB_ACTION_PATH}/setup_sqlcl.sh"
