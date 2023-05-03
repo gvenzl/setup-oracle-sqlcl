@@ -1,6 +1,6 @@
 = Setup Oracle SQLcl Action
 :linkattrs:
-:project-owner: aalmiray
+:project-owner: gvenzl
 :project-name:  setup-oracle-sqlcl
 :project-tag:   v1
 
@@ -55,5 +55,5 @@ jobs:
 
 == Versions
 
-Full list of supported versions can be found link:https://github.com/aalmiray/setup-oracle-sqlcl/blob/main/versions.txt[here].
+Full list of supported versions can be found link:https://github.com/gvenzl/setup-oracle-sqlcl/blob/main/versions.txt[here].
 Use `latest` (default) to always pull the latest release. Use an explicit version to pin it for reproducible builds.

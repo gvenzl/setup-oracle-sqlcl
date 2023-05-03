@@ -57,7 +57,7 @@ class get_sqlcl {
         var sqlclDirectory = Path.of(".sqlcl");
         Files.createDirectories(sqlclDirectory);
 
-        var url = "https://raw.githubusercontent.com/aalmiray/setup-oracle-sqlcl/main/versions.txt";
+        var url = "https://raw.githubusercontent.com/gvenzl/setup-oracle-sqlcl/main/versions.txt";
         var file = sqlclDirectory.resolve("versions.txt");
 
         var versions = new TreeMap<String, String>(Comparator.reverseOrder());
