@@ -15,7 +15,7 @@ endif::[]
 image:https://img.shields.io/github/v/release/{project-owner}/{project-name}["GitHub release", link="https://github.com/{project-owner}/{project-name}/releases"]
 
 Sets up the link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/[Oracle SQLcl] command line tool. This action locates
-a given version of Oracle SQLcl, downloads it, and configures the `$PATH` environment so that SQLcl can be invoked via `sql`.
+a given version of Oracle SQLcl, downloads it, and configures the `PATH` environment variable so that SQLcl can be invoked via `sql`.
 
 Supported platforms:
 
