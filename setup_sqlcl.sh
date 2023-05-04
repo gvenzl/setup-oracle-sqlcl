@@ -20,7 +20,7 @@ set -e
 echo "::group::📦 Download SQLcl"
 
 # download
-java "${GITHUB_ACTION_PATH}/get_sqlcl.java" ${VERSION}
+java "${GITHUB_ACTION_PATH}/get_sqlcl.java" "${VERSION}"
 
 # extract
 PWD=$(pwd)
@@ -29,13 +29,13 @@ export SQLCL_HOME="${SQLCLDIR}/sqlcl-${VERSION}"
 unzip -qo -d "${SQLCLDIR}" "${SQLCLDIR}/sqlcl.zip"
 mv "${SQLCLDIR}/sqlcl" "${SQLCL_HOME}"
 
-echo "SQLCL_HOME=${SQLCL_HOME}" >> $GITHUB_ENV
+echo "SQLCL_HOME=${SQLCL_HOME}" >> "$GITHUB_ENV"
 
 # eval version
 CMD="${SQLCL_HOME}/bin/sql -version"
 eval "${CMD}"
 
 # export
-echo "${SQLCL_HOME}/bin" >> $GITHUB_PATH
+echo "${SQLCL_HOME}/bin" >> "$GITHUB_PATH"
 
 echo "::endgroup::"
