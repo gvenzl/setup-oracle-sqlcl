@@ -14,13 +14,13 @@ endif::[]
 
 image:https://img.shields.io/github/v/release/{project-owner}/{project-name}["GitHub release", link="https://github.com/{project-owner}/{project-name}/releases"]
 
-Sets up link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/[Oracle SQLcl] as a tool. This action locates
-a given version of Oracle SQLcl, downloads it, and configures the `PATH` environment.
+Sets up the link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/[Oracle SQLcl] command line tool. This action locates
+a given version of Oracle SQLcl, downloads it, and configures the `PATH` environment variable so that SQLcl can be invoked via `sql`.
 
 Supported platforms:
 
  - Linux
- - MacOs
+ - MacOS
  - Windows
 
 == Inputs
@@ -30,11 +30,11 @@ Following inputs may be used as `step.with` keys:
 [%header,cols="<2,<,<,<3",width="100%"]
 |===
 | Name               | Required | Default  | Description
-| version            |          | latest   | Valid version from link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/[download] site.
+| version            |          | latest   | A valid version of SQLcl from the link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/[download] site.
 | setup-java-version |          | 17       | Automatically setup Oracle JDK with the chosen version. Set to `false` to skip it.
 |===
 
-NOTE: If you decide to skip automatic Java setup then you'll be responsible for configuring Java with version `11` as a minimum.
+NOTE: If you decide to skip the automatic Java setup then you'll be responsible for configuring Java with version `11` as a minimum.
 We recommend using link:https://github.com/actions/setup-java[actions/setup-java].
 
 == Usage
@@ -55,5 +55,5 @@ jobs:
 
 == Versions
 
-Full list of supported versions can be found link:https://github.com/gvenzl/setup-oracle-sqlcl/blob/main/versions.txt[here].
-Use `latest` (default) to always pull the latest release. Use an explicit version to pin it for reproducible builds.
+The full list of supported SQLcl versions can be found link:https://github.com/gvenzl/setup-oracle-sqlcl/blob/main/versions.txt[here].
+Use `version: latest` (default & recommended) to always pull the latest release of SQLcl or use an explicit version of SQLcl to pin it for reproducible builds.
