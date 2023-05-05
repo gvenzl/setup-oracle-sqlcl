@@ -16,6 +16,7 @@ image:https://img.shields.io/github/v/release/{project-owner}/{project-name}["Gi
 
 Sets up the link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/[Oracle SQLcl] command line tool. This action locates
 a given version of Oracle SQLcl, downloads it, and configures the `PATH` environment variable so that SQLcl can be invoked via `sql`.
+An environment variable `SQLCL_HOME` also points to the location where the given SQLcl version was installed.
 
 Supported platforms:
 
