@@ -51,7 +51,7 @@ jobs:
       - uses: {project-owner}/{project-name}@{project-tag}
       - name: Run SQLcl
         run: |
-          sql &lt;arguments&gt;
+          ${SQLCL_HOME}/bin/sql &lt;arguments&gt;
 ----
 
 == Versions
