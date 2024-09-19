@@ -32,7 +32,7 @@ Following inputs may be used as `step.with` keys:
 |===
 | Name               | Required | Default  | Description
 | version            |          | latest   | A valid version of SQLcl from the link:https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/[download] site.
-| setup-java-version |          | 17       | Automatically setup Oracle JDK with the chosen version. Set to `false` to skip it.
+| setup-java-version |          | 21       | Automatically setup Oracle JDK with the chosen version. Set to `false` to skip it.
 |===
 
 NOTE: If you decide to skip the automatic Java setup then you'll be responsible for configuring Java with version `11` as a minimum.

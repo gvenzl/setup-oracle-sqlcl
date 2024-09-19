@@ -13,7 +13,7 @@ inputs:
     required: true
 
   setup-java-version:
-    default: '17'
+    default: '21'
     description: 'Setup internal Java runtime.'
     required: false
 
