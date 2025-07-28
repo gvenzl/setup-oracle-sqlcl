@@ -2,8 +2,13 @@ name: Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: The SQLcl version to download
+        default: "latest"
 
 jobs:
   test:
@@ -16,3 +21,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./
+        with:
+          version: ${{ inputs.version }}
