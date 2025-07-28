@@ -25,11 +25,9 @@ if [[ ${VERSION} == "latest" ]]; then
 else
   # Version download page
   download_page="https://www.oracle.com/sqlcl/download/sqlcl-downloads-${VERSION}.html"
-  echo "download_page: ${download_page}"
 
   # Check whether download page exists
   http_code=$(curl -s -L -o /dev/null -w "%{http_code}" "${download_page}")
-  echo "http_code: ${http_code}"
 
   if [[ "${http_code}" != "200" ]]; then
     echo "❌ SQLcl version '${VERSION}' could not be resolved."
