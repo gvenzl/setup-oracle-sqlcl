@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: Apache-2.0
 #
-# Copyright 2023 Andres Almiray
+# Copyright 2025 Gerald Venzl, Andres Almiray
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,25 +17,46 @@
 
 set -e
 
-echo "::group::📦 Download SQLcl"
+echo "::group::⬇️ Download SQLcl"
 
-# download
-java "${GITHUB_ACTION_PATH}/get_sqlcl.java" "${VERSION}"
+# Download well-known latest version of SQLcl
+if [[ ${VERSION} == "latest" ]]; then
+  curl -s -o "sqlcl.zip" "https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip"
+else
+  # Version download page
+  download_page="https://www.oracle.com/sqlcl/download/sqlcl-downloads-${VERSION}.html"
+  echo "download_page: ${download_page}"
 
-# extract
-PWD=$(pwd)
-SQLCLDIR="${PWD}/.sqlcl"
-export SQLCL_HOME="${SQLCLDIR}/sqlcl-${VERSION}"
-unzip -qo -d "${SQLCLDIR}" "${SQLCLDIR}/sqlcl.zip"
-mv "${SQLCLDIR}/sqlcl" "${SQLCL_HOME}"
+  # Check whether download page exists
+  http_code=$(curl -s -L -o /dev/null -w "%{http_code}" "${download_page}")
+  echo "http_code: ${http_code}"
 
-echo "SQLCL_HOME=${SQLCL_HOME}" >> "$GITHUB_ENV"
+  if [[ "${http_code}" != "200" ]]; then
+    echo "❌ SQLcl version '${VERSION}' could not be resolved."
+    echo "Make sure that the version exists!"
+    exit 1;
+  fi;
 
-# eval version
-CMD="${SQLCL_HOME}/bin/sql -version"
-eval "${CMD}"
+  # Getting the download page based on the version
+  download_link=$(curl -L -s "${download_page}" | grep "https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-${VERSION}" | grep -oP 'href="\K[^"]+')
 
-# export
-echo "${SQLCL_HOME}/bin" >> "$GITHUB_PATH"
+  # Download SQLcl
+  curl -s -o "sqlcl.zip" "${download_link}"
+
+fi;
+
+echo "::endgroup::"
+
+echo "::group::📦 Extract SQLcl"
+
+# Extract sqlcl
+unzip -qo "sqlcl.zip"
+
+echo "SQLCL_HOME=${PWD}/sqlcl" >> "$GITHUB_ENV"
+
+# State version
+${PWD}/sqlcl/bin/sql -version
+
+echo "${PWD}/sqlcl/bin" >> "$GITHUB_PATH"
 
 echo "::endgroup::"
